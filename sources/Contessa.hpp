@@ -1,3 +1,4 @@
+// Can block the assasinate (Assasin action).
 #pragma once
 #include <iostream>
 #include <stdlib.h>

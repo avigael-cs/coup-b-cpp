@@ -1,3 +1,5 @@
+//Can take tax of 3 coins from the treasury , 
+//this action cannot be blocked by no one in addition the duke could block foreign_aid from every player.
 #pragma once
 #include <iostream>
 #include <stdlib.h>

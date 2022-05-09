@@ -1,3 +1,6 @@
+// Can assisinate (coup) every player for 3 coins intead of 7 , 
+//this action can be blocked by Contessa role.
+
 #pragma once
 #include "Player.hpp"
 #include <iostream>

@@ -1,3 +1,5 @@
+//Can steal 2 coins from other player , 
+//this action can be blocked by other Captain or Ambassador.
 #pragma once
 #include <string>
 #include <map>

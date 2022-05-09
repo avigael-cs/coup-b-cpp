@@ -15,6 +15,15 @@ const int COUP_PRICE = 7;
 
 namespace coup
 {
+    Player::Player()
+    {
+        // this->nameOfPlayer = std::move(name);
+        // this->numOfCoins = INIT_COINS;
+        // this->id = game.addPlayer(this);
+        // this->game = &game;
+        // this->alive = true;
+    }
+
     Player::Player(Game & game, string name)
     {
         nameOfPlayer = std::move(name);
@@ -57,7 +66,7 @@ namespace coup
     }
     bool Player::inTheGame() const{    
         if (!game->isActive()&&game->players().size()<2) {
-            throw std::runtime_error("not enough players to start the game!");
+            throw runtime_error("not enough players to start the game!");
         } 
         return game->turnPlayer()==this;
     }
@@ -82,8 +91,7 @@ namespace coup
         }
         
         plusCoins(1);
-        game->nextTurn;
-        //not finished
+        
     }
 
     void Player::foreign_aid(){

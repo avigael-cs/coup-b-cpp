@@ -1,3 +1,5 @@
+//Can transfer one coin from player to player , 
+//in addition Ambassador can block steal action (Captain action).
 #pragma once
 #include "Player.hpp"
 

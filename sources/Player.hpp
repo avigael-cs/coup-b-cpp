@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <map>
 #include <stdlib.h>
 #include <exception>
 #include "Game.hpp"
@@ -14,11 +15,12 @@ namespace coup {
         
         string nameOfPlayer;
         string Role_NameOfPlayer;
-        bool alive;;
+        bool alive;
         Game *game;
         int numOfCoins;
+        map <string , Player*> lastAction;
         int id;
-            
+        string last_operation;
             
         public:
 
@@ -41,10 +43,11 @@ namespace coup {
             void setId(int);
             virtual void resetPlayer();
 
-            Player(Game& game, string name);            
-            void coup(Player &player);
-            void income();                     
-            void foreign_aid();            
+            Player(Game& game, string name);
+            Player::Player();            
+            void coup(Player &player); //to "kill" given player.
+            void income();  // recieving 1 coin from the treasury                   
+            void foreign_aid(); // receiving 2 coins from the treasury (that action can be blocked by duke)           
             void die();                       
             void revive();                     
             int coins();                    

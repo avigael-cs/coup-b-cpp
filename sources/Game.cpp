@@ -6,8 +6,8 @@ const int MAX_NUM_OF_PLAYER = 6;
 namespace coup {
 
     Game::Game() {
-        gameStart = false;
-        gameFinish = false;
+        started = false;
+        finished = false;
         turnOfPlayer = nullptr;
     }
 
@@ -15,10 +15,10 @@ namespace coup {
     vector<string> Game::players()
     {
         vector<string> vecPlayers;
-        for (size_t i = 0; i < allPlayers.size(); i++)
+        for (size_t i = 0; i < playersList.size(); i++)
         {
-            if (allPlayers.at(i)!=nullptr) {
-                vecPlayers.push_back(allPlayers.at(i)->getNameOfPlayer());
+            if (playersList.at(i)!=nullptr) {
+                vecPlayers.push_back(playersList.at(i)->getNameOfPlayer());
             }
         }
         return vecPlayers;
@@ -29,7 +29,7 @@ namespace coup {
     
     string Game::turn()
     {
-        if (allPlayers.empty())
+        if (playersList.empty())
         {
             throw "Error - no players !";
         }
@@ -39,63 +39,62 @@ namespace coup {
     //the function add the player to the game and returns the ID of the player.
     int Game::addPlayer(Player *newPlayer) 
     {
-        if(gameStart||gameFinish) {
+        if(started||finished) {
             throw std::runtime_error("can't add new players at this stage");
         }
-        if (allPlayers.size() == MAX_NUM_OF_PLAYER)
+        if (playersList.size() == MAX_NUM_OF_PLAYER)
         {
             throw invalid_argument("Error we have max players capacity");
         }
-        if (allPlayers.empty()) {
+        if (playersList.empty()) {
             turnOfPlayer = newPlayer;
         }
-        allPlayers.push_back(newPlayer);
+        playersList.push_back(newPlayer);
         //id
-        newPlayer->setId(allPlayers.size()-1);
-        return allPlayers.size()-1;
+        newPlayer->setId(playersList.size()-1);
+        return playersList.size()-1;
     }
 
     //the function is called when a player is couped. 
     void Game::removePlayer(Player *losePlayer) {
-        for (size_t i = 0; i < allPlayers.size(); i++)
+        for (size_t i = 0; i < playersList.size(); i++)
         {
-            if (allPlayers.at(i)==losePlayer) {
+            if (playersList.at(i)==losePlayer) {
                 cout << "\t\player " << losePlayer->getNameOfPlayer() << "was removed from the game!\n";
-                allPlayers[i] = nullptr;
+                playersList[i] = nullptr;
                 break;
             }
         }
         losePlayer->setAlive(false);
         //If only one player remaining - the game is finished
         size_t numOfplayers = 0;
-        for (size_t i = 0; i < allPlayers.size(); i++)
+        for (size_t i = 0; i < playersList.size(); i++)
         {
-            if (allPlayers.at(i)!=nullptr) {
+            if (playersList.at(i)!=nullptr) {
                 numOfplayers++;
             }
         }
         //the player won
         if (numOfplayers == 1) 
         {
-            gameFinish = true;
+            finished = true;
         } 
     }
+
+
     bool Game::isActive() const{
-        if (gameFinish) {
-            return !gameFinish;
-        }
-        return gameStart;
+       
     }
 
     string Game::winner() 
     {
-        if (!gameFinish) {
+        if (!finished) {
             throw runtime_error("the game is not finish");
         }
-        for (size_t i = 0; i < allPlayers.size(); i++)
+        for (size_t i = 0; i < playersList.size(); i++)
         {
-            if (allPlayers.at(i)!=nullptr) {
-                return allPlayers.at(i)->getNameOfPlayer();
+            if (playersList.at(i)!=nullptr) {
+                return playersList.at(i)->getNameOfPlayer();
             }
         }
         return "error";
