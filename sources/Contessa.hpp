@@ -15,7 +15,7 @@ namespace coup {
     {
     public:
         //Contessa(Game &game, string nameOfPlayer);
-        Contessa(Game &game, string nameOfPlayer): Player(){}
+        //Contessa(Game &game, string nameOfPlayer): Player(){}
         ~Contessa() {}
     };
 }

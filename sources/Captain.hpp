@@ -12,7 +12,7 @@ namespace coup {
         private:
 
         public:
-            Captain(Game game, string nameOfPlayer): Player(){}
+            Captain(Game &game, string nameOfPlayer);
             void steal(Player &player);
             void block(Player &player);
             ~Captain() {}

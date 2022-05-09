@@ -12,7 +12,7 @@ namespace coup {
     {
     public:
         //contructor
-        Duke(Game, string): Player(){}
+        //Duke(Game, string): Player(){}
         
         
         //functions

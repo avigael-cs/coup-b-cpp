@@ -15,7 +15,7 @@ namespace coup {
 
         public:
             //constructors 
-            Assassin( Game game , string name ): Player(){}
+            Assassin( Game &game , string name );
             //getters 
             string role() const override;
             bool isCouped() const;

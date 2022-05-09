@@ -6,6 +6,7 @@
 #include <string>
 #include <stdlib.h>
 #include "Player.hpp"
+const int MAX_PLAYER = 6;
 //using namespace coup;
 using namespace std;
 
@@ -15,7 +16,7 @@ namespace coup
         bool gameStart;
         bool gameFinish;
         vector<Player *> allPlayers;
-        Player *playerTurn;
+        Player *turnOfPlayer;
         private:   
 
         public:
@@ -24,7 +25,7 @@ namespace coup
             void revivePlayer(Player *);
             int addPlayer(Player *);
             void removePlayer(Player *);
-
+            bool Game::isActive() const;
             void nextTurn();
             Player *turnPlayer() const;
             Game();

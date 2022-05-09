@@ -24,23 +24,24 @@ namespace coup {
 
             /* --- getters --- */
             Game* getGame() const;
-            std::string getNameOfPlayer() const;
-            // bool isPlaying() const;
+            string getNameOfPlayer() const;
+            
             // bool didForeign() const;
             // bool isInGame(Player &);
-            // bool isMaxCoins() const;
+          
             bool isAlive() const;
             virtual std::string role() const;
             int getCoins() const;
-            size_t getid() const;
+            int getId() const;
+            bool Player::inTheGame() const;
 
             /* --- setters --- */
             void setAlive(bool);
-            void setCoins(int);
+            void plusCoins(int);
             void setId(int);
             virtual void resetPlayer();
 
-            //Player(Game& game, string name);            
+            Player(Game& game, string name);            
             void coup(Player &player);
             void income();                     
             void foreign_aid();            
@@ -48,7 +49,7 @@ namespace coup {
             void revive();                     
             int coins();                    
             string role();  
-            void block(Player);                          
+            void block(Player &player);                          
             ~Player() {}
         };
 }

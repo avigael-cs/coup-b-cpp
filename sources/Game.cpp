@@ -8,7 +8,7 @@ namespace coup {
     Game::Game() {
         gameStart = false;
         gameFinish = false;
-        playerTurn = nullptr;
+        turnOfPlayer = nullptr;
     }
 
     //get list of players
@@ -23,14 +23,17 @@ namespace coup {
         }
         return vecPlayers;
     }
-
+    Player* Game::turnPlayer() const{
+        return turnOfPlayer;
+    }
+    
     string Game::turn()
     {
         if (allPlayers.empty())
         {
             throw "Error - no players !";
         }
-        return playerTurn->getNameOfPlayer();
+        return turnOfPlayer->getNameOfPlayer();
     }
     
     //the function add the player to the game and returns the ID of the player.
@@ -44,7 +47,7 @@ namespace coup {
             throw invalid_argument("Error we have max players capacity");
         }
         if (allPlayers.empty()) {
-            playerTurn = newPlayer;
+            turnOfPlayer = newPlayer;
         }
         allPlayers.push_back(newPlayer);
         //id
@@ -57,7 +60,7 @@ namespace coup {
         for (size_t i = 0; i < allPlayers.size(); i++)
         {
             if (allPlayers.at(i)==losePlayer) {
-                std::cout << "\t\player " << losePlayer->getNameOfPlayer() << "was removed from the game!\n";
+                cout << "\t\player " << losePlayer->getNameOfPlayer() << "was removed from the game!\n";
                 allPlayers[i] = nullptr;
                 break;
             }
@@ -76,6 +79,12 @@ namespace coup {
         {
             gameFinish = true;
         } 
+    }
+    bool Game::isActive() const{
+        if (gameFinish) {
+            return !gameFinish;
+        }
+        return gameStart;
     }
 
     string Game::winner() 
