@@ -1,7 +1,5 @@
-
 #include "Duke.hpp"
-
-using namespace coup;
+#include "Game.hpp"
 
 namespace coup {
 
@@ -9,16 +7,18 @@ namespace coup {
         if (!inTheGame()) {
             throw runtime_error("it is not the player's turn.");
         }
-
-        if (numOfCoins>=MAX_COINS) {
-            throw runtime_error("Player must coup!");
-        }
         
-        plusCoins(3);   
+        plusCoins(3);
+
+        game->nextTurn();
+
+        lastIsForeignAid = false;
     }
 
     void Duke::block(Player& player) {
-        player.setBlcokedForeignAdd(true);
+        player.beBlockedForeignAid();
+
+        // game->nextTurn();
     }
 
     string Duke::role() const {

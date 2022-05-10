@@ -13,7 +13,6 @@
 #include <string>
 #include "Player.hpp"
 
-const int MAX_PLAYER = 6;
 
 //using namespace coup;
 //using namespace std;
@@ -22,14 +21,15 @@ using std::vector;
 
 namespace coup
 {
-    class Game{
+	class Game{
 		bool started;
 		bool finished;
 		vector<string> playersNames;
-		vector<Player *> playersList;
+		vector<Player*> playersList;
 		Player *turnOfPlayer;
 		int numOfPlayers;
-		uint currentPlayer;
+		
+		const int MAX_PLAYER = 6;
 
 	public:
 		//getters
@@ -37,7 +37,6 @@ namespace coup
 		Game();
 		~Game() {}
 
-		void revivePlayer(Player *);
 		int addPlayer(Player *); //Adding the given player to the game (Cannot be added if the game has been started.)
 		void removePlayer(Player *);
 		bool isActive() const;
@@ -47,8 +46,7 @@ namespace coup
 		std::vector<string> players(); //- returns the active players data structor.
 		string turn(); //- returns the name of the player who playing right now.
 		string winner(); //returns the winner name only if the game is over.
-		int numberOfPlayers(); //- return the number of players.
-		void finishTurn(); // promoting the turn index.
+		void start();
 	};
 }   
-    
+	

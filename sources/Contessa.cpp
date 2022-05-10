@@ -1,5 +1,6 @@
 #include <string>
 #include "Contessa.hpp"
+#include "Game.hpp"
 
 namespace coup {
     string Contessa::role() const {
@@ -7,6 +8,8 @@ namespace coup {
     }
 
     void Contessa::block(Player &player) {
-        player.setBlockedCoup(true);
+        player.beBlocked();
+
+        // game->nextTurn();
     }
 }

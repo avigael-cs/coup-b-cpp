@@ -16,21 +16,18 @@ namespace coup {
     class Player 
     {
     protected:
+        string nameOfPlayer;
+        bool alive;
+        Game *game;
+        int numOfCoins;
+        int id;
+        bool lastIsForeignAid;
+            
+    public:
         static const int INIT_COINS = 0;
         static const int MAX_COINS = 10;
         static const int COUP_PRICE = 7;
 
-        string nameOfPlayer;
-        string Role_NameOfPlayer;
-        bool alive;
-        Game *game;
-        int numOfCoins;
-        std::map<string , Player*> lastAction;
-        int id;
-        string last_operation;
-        bool blockedForeignAdd;
-            
-    public:
         Player(Game& game, string name);         
         ~Player() {}
 
@@ -42,8 +39,8 @@ namespace coup {
         // bool isInGame(Player &);
         
         bool isAlive() const;
-        virtual std::string role() const;
-        int getCoins() const;
+        virtual string role() const;
+        int coins() const;
         int getId() const;
         bool inTheGame() const;
 
@@ -51,17 +48,14 @@ namespace coup {
         void setAlive(bool);
         void plusCoins(int);
         void setId(int);
-        void setBlcokedForeignAdd(bool);
-        virtual void setBlockedCoup(bool);
-        virtual void setBlockedSteal(bool);
-        // virtual void resetPlayer();
+        virtual void beBlocked();
+        void beBlockedForeignAid();
 
         virtual void coup(Player &player); //to "kill" the player.
         void income();  // get 1 coin from the game                   
-        void foreign_aid(); // get 2 coins from the game (that action can be blocked by duke)           
+        void foreign_aid(); // get 2 coins from the game - this action can be blocked by duke           
         void die();                       
-        void revive();                     
-        int coins();                    
+        void revive();                                       
 
         virtual void block(Player &player);
     };

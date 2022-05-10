@@ -1,32 +1,42 @@
 #include "Captain.hpp"
+#include "Game.hpp"
 
 namespace coup {
 
-    Captain::Captain(Game &game, string nameOfPlayer) : Player(game, nameOfPlayer) {
-        blockedSteal = false;
+    Captain::Captain(Game &game, string name) : Player(game, std::move(name)) {
+        stealed = nullptr;
     }
 
-    void Captain::steal(Player &player)
-    {
-        if (blockedSteal) {
-            blockedSteal = false;
-            return;
+    void Captain::steal(Player &player) {
+        if (!inTheGame()) {
+            throw runtime_error("it is not the player's turn.");
         }
 
-        player.plusCoins(-1);
-        plusCoins(1);
+        int coins = player.coins() > 1 ? 2 : 1;
+        player.plusCoins(-coins);
+        plusCoins(coins);
+
+        stealed = &player;
+
+        game->nextTurn();
+
+        lastIsForeignAid = false;
     }
 
     void Captain::block(Player &player)
     {
-        player.setBlockedSteal(true);
+        player.beBlocked();
+
+        // game->nextTurn();
     }
 
     string Captain::role() const {
         return "Captain";
     }
 
-    void Captain::setBlockedSteal(bool blockedSteal) {
-        this->blockedSteal = blockedSteal;
+    void Captain::beBlocked() {
+        stealed->plusCoins(2);
+        plusCoins(-2);
+        stealed = nullptr;
     }
 }

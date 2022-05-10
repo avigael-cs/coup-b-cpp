@@ -17,7 +17,7 @@ namespace coup {
     {
         static const int ASSASSINATION_PRICE = 3;
 
-        bool blockedCoup;
+        Player* killed;
 
     public:
         //constructors 
@@ -30,7 +30,6 @@ namespace coup {
         //function
         void coup(Player &player) override;
 
-        void setBlockedCoup(bool blockedCoup) override;
-        //deconstructor
+        void beBlocked() override;
     };
 }

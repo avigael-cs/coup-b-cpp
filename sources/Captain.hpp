@@ -11,14 +11,14 @@ using namespace coup;
 namespace coup {
     class Captain : public Player
     {
-        bool blockedSteal;
+        Player* stealed;
 
     public:
         Captain(Game &game, string nameOfPlayer);
         ~Captain() {}
-        void steal(Player &player);
+        void steal(Player &player);// this action can be block by another captain or ambassador
         void block(Player &player) override;
         string role() const override;
-        void setBlockedSteal(bool blockedSteal) override;
+        void beBlocked() override;
     };
 }
