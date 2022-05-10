@@ -5,50 +5,50 @@
 // Turns will be determinate following the join order.
 
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include <map>
 #include <unordered_map>
 #include <string>
-#include <stdlib.h>
 #include "Player.hpp"
+
 const int MAX_PLAYER = 6;
+
 //using namespace coup;
-using namespace std;
+//using namespace std;
+using std::string;
+using std::vector;
 
 namespace coup
 {
     class Game{
-        bool started;
-        bool finished;
-        vector<string> playersNames;
-        vector<Player *> playersList;
-        Player *turnOfPlayer;
-        int numOfPlayers;
-        uint currentPlayer;
-        private:   
+		bool started;
+		bool finished;
+		vector<string> playersNames;
+		vector<Player *> playersList;
+		Player *turnOfPlayer;
+		int numOfPlayers;
+		uint currentPlayer;
 
-        public:
-            //getters
-              /* --- functions --- */
-            void revivePlayer(Player *);
-            int addPlayer(Player *); //Adding the given player to the game (Cannot be added if the game has been started.)
-            void removePlayer(Player *);
-            bool Game::isActive() const;
-            void nextTurn();
-            Player *turnPlayer() const;
-            Game();
-            void add_player(Player &player);
-            vector<string> players(); //- returns the active players data structor.
-            string turn(); //- returns the name of the player who playing right now.
-            string Game::winner(); //returns the winner name only if the game is over.
-            int numberOfPlayers(); //- return the number of players.
-            void finishTurn(); // promoting the turn index.
-            ~Game() {}
-    };
-    
-    
-}
+	public:
+		//getters
+		/* --- functions --- */
+		Game();
+		~Game() {}
 
-   
+		void revivePlayer(Player *);
+		int addPlayer(Player *); //Adding the given player to the game (Cannot be added if the game has been started.)
+		void removePlayer(Player *);
+		bool isActive() const;
+		void nextTurn();
+		Player *turnPlayer() const;
+		void setTurnPlayer(Player* player);
+		std::vector<string> players(); //- returns the active players data structor.
+		string turn(); //- returns the name of the player who playing right now.
+		string winner(); //returns the winner name only if the game is over.
+		int numberOfPlayers(); //- return the number of players.
+		void finishTurn(); // promoting the turn index.
+	};
+}   
     

@@ -15,8 +15,9 @@ namespace coup {
     class Contessa : public Player
     {
     public:
-        //Contessa(Game &game, string nameOfPlayer);
-        //Contessa(Game &game, string nameOfPlayer): Player(){}
+        Contessa(Game &game, string name): Player(game, name) {}
         ~Contessa() {}
+        void block(Player &player) override;
+        virtual string role() const override;
     };
 }

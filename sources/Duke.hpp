@@ -14,13 +14,12 @@ namespace coup {
     {
     public:
         //contructor
-        //Duke(Game, string): Player(){}
-        
-        
+        Duke(Game& game, string name): Player(game, name) {}
+    
         //functions
         void tax();
         string role() const override;
-        void block(Player &player);
+        void block(Player &player) override;
         ~Duke() {}
     };
 }

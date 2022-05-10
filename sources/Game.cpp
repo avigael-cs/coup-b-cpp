@@ -12,26 +12,27 @@ namespace coup {
     }
 
     //get list of players
-    vector<string> Game::players()
-    {
-        vector<string> vecPlayers;
-        for (size_t i = 0; i < playersList.size(); i++)
-        {
-            if (playersList.at(i)!=nullptr) {
-                vecPlayers.push_back(playersList.at(i)->getNameOfPlayer());
-            }
+    std::vector<string> Game::players() {
+        std::vector<string> vecPlayers;
+        for (size_t i = 0; i < playersList.size(); i++) {
+            vecPlayers.push_back(playersList.at(i)->getNameOfPlayer());
         }
         return vecPlayers;
     }
-    Player* Game::turnPlayer() const{
+
+    Player* Game::turnPlayer() const {
         return turnOfPlayer;
     }
+
+	void Game::setTurnPlayer(Player* player) {
+		turnOfPlayer = player;
+	}
     
     string Game::turn()
     {
         if (playersList.empty())
         {
-            throw "Error - no players !";
+            throw std::runtime_error("Error - no players !");
         }
         return turnOfPlayer->getNameOfPlayer();
     }
@@ -44,7 +45,7 @@ namespace coup {
         }
         if (playersList.size() == MAX_NUM_OF_PLAYER)
         {
-            throw invalid_argument("Error we have max players capacity");
+            throw std::invalid_argument("Error we have max players capacity");
         }
         if (playersList.empty()) {
             turnOfPlayer = newPlayer;
@@ -60,7 +61,7 @@ namespace coup {
         for (size_t i = 0; i < playersList.size(); i++)
         {
             if (playersList.at(i)==losePlayer) {
-                cout << "\t\player " << losePlayer->getNameOfPlayer() << "was removed from the game!\n";
+                std::cout << "player " << losePlayer->getNameOfPlayer() << "was removed from the game!\n";
                 playersList[i] = nullptr;
                 break;
             }
@@ -82,8 +83,8 @@ namespace coup {
     }
 
 
-    bool Game::isActive() const{
-       
+    bool Game::isActive() const {
+		return !finished;
     }
 
     string Game::winner() 
@@ -91,12 +92,32 @@ namespace coup {
         if (!finished) {
             throw runtime_error("the game is not finish");
         }
-        for (size_t i = 0; i < playersList.size(); i++)
+
+		return playersList.at(0)->getNameOfPlayer();
+        /*for (size_t i = 0; i < playersList.size(); i++)
         {
             if (playersList.at(i)!=nullptr) {
                 return playersList.at(i)->getNameOfPlayer();
             }
         }
-        return "error";
+        return "error";*/
     }
+
+	void Game::nextTurn() {
+		uint i = 0;
+		for (Player* player : playersList) {
+			if (player == turnOfPlayer) {
+				break;
+			}
+			i++;
+		}
+
+		i++;
+
+		if (i == playersList.size()) {
+			i = 0;
+		}
+
+		turnOfPlayer = playersList.at(i);
+	}
 }

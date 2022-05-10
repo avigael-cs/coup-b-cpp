@@ -2,34 +2,35 @@
 //this action can be blocked by Contessa role.
 
 #pragma once
-#include "Player.hpp"
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <stdlib.h>
-using namespace coup;
-using namespace std;
+#include "Player.hpp"
+#include "Game.hpp"
+
+// using namespace coup;
+
 namespace coup {
+
     class Assassin : public Player
     {
-        
-        private:
-            
+        static const int ASSASSINATION_PRICE = 3;
 
-        public:
-            //constructors 
-            Assassin( Game &game , string name );
-            //getters 
-            string role() const override;
-            bool isCouped() const;
-            Player *getCoupedPlayer() const;
-            //setters
-            void setPlayer();
+        bool blockedCoup;
 
+    public:
+        //constructors 
+        Assassin( Game &game , string name );
+        ~Assassin() {}
 
-            //function
-            void coup(Player &player);
-            //deconstructor
-            ~Assassin() {}
+        //getters 
+        string role() const override;
+
+        //function
+        void coup(Player &player) override;
+
+        void setBlockedCoup(bool blockedCoup) override;
+        //deconstructor
     };
 }
